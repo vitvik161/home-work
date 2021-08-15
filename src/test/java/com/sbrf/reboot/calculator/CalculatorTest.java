@@ -27,6 +27,11 @@ class CalculatorTest {
     }
 
     @Test
+    void getSqrt() {
+        assertEquals(3, Calculator.getSqrt(9));
+    }
+
+    @Test
     void classHasSevenMethods(){
         assertEquals(7,Calculator.class.getMethods().length-Object.class.getMethods().length);
     }
