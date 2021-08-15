@@ -2,8 +2,6 @@ package com.sbrf.reboot.calculator;
 
 public class Calculator {
 
-        private int firstNumber;
-        private int secondNumber;
         public static int getAddition(int firstNumber, int secondNumber) {
             return firstNumber+secondNumber;
         }
