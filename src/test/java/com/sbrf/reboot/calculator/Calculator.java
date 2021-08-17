@@ -22,6 +22,7 @@ public class Calculator {
     }
 
     public static int getMod(int firstNumber, int secondNumber) {
+
         return firstNumber % secondNumber;
     }
 

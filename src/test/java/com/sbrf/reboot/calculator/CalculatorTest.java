@@ -35,4 +35,13 @@ class CalculatorTest {
     void classHasSevenMethods(){
         assertEquals(7,Calculator.class.getMethods().length-Object.class.getMethods().length);
     }
+
+    @Test
+    void getSqr() {
+    }
+
+    @Test
+    void getMod() {
+        assertEquals(2,Calculator.getMod(5,3));
+    }
 }
