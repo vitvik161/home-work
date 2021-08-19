@@ -14,13 +14,14 @@ public class AccountService {
 
     public boolean isAccountExist(long clientId, Account account) {
         boolean flag = false;
-        Set<Account> accounts = accountRepository.getAllAccountsByClientId(clientId);
-        for (Account value : accounts) {
-            if (account.equals(value)) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
+        return accountRepository.getAllAccountsByClientId(clientId).contains(account);
+        //        Set<Account> accounts = accountRepository.getAllAccountsByClientId(clientId);
+//        for (Account value : accounts) {
+//            if (account.equals(value)) {
+//                flag = true;
+//                break;
+//            }
+//        }
+//        return flag;
     }
 }
