@@ -1,14 +1,21 @@
 package com.sbrf.reboot.service;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 public class Account {
-    private long id;
-    private String accNUM;
+    private long clientId;
+    private String number;
 
-    public Account(String accNUM) {
-        this.accNUM = accNUM;
-        this.id = 1L;
+    public Account(String number) {
+        this.number = number;
+        clientId = 1L;
+    }
+    @JsonCreator
+    public Account(@JsonProperty("clientId") long clientId, @JsonProperty("number") String number) {
+        this.clientId = clientId;
+        this.number = number;
     }
 }

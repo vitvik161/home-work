@@ -1,5 +1,7 @@
 package com.sbrf.reboot.repository;
 
+import com.sbrf.reboot.service.Account;
+import com.sbrf.reboot.service.AccountRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,27 +19,31 @@ class AccountRepositoryImplTest {
 
 
     @Test
-    void onlyPersonalAccounts() throws IOException {
+    void onlyPersonalAccounts()  throws IOException{
         accountRepository = new AccountRepositoryImpl("src/main/resources/Accounts.txt");
-        Set<String> allAccountsByClientId = accountRepository.getAllAccountsByClientId(1);
-        ArrayList<String> strings = new ArrayList<String>() {{
-            add("2-ACCNUM");
-            add("1-ACCNUM");
-            add("4-ACC1NUM");
+        Set<Account> allAccountsByClientId = accountRepository.getAllAccountsByClientId(1);
+        System.out.println("Это возвращает функция");
+        System.out.println(allAccountsByClientId);
+        ArrayList<Account> accounts = new ArrayList<Account>() {{
+            add(new Account(1,"2-ACCNUM"));
+            add(new Account(1,"1-ACCNUM"));
+            add(new Account(1,"4-ACC1NUM"));
         }};
+        System.out.println("Это массив");
+        System.out.println(accounts);
 
-        assertTrue(strings.containsAll(allAccountsByClientId));
+        assertTrue(allAccountsByClientId.containsAll(accounts));
     }
 
     @Test
-    void successGetAllAccountsByClientId() throws IOException {
+    void successGetAllAccountsByClientId()  throws IOException{
         accountRepository = new AccountRepositoryImpl("src/main/resources/Accounts.txt");
-        Set<String> allAccountsByClientId = accountRepository.getAllAccountsByClientId(1);
-        Assertions.assertTrue(allAccountsByClientId.contains("5-ACC1NUM"));
+        Set<Account> allAccountsByClientId = accountRepository.getAllAccountsByClientId(1);
+        Assertions.assertTrue(allAccountsByClientId.contains(new Account(2,"5-ACC1NUM")));
     }
 
     @Test
-    void failGetAllAccountsByClientId() {
+    void failGetAllAccountsByClientId(){
         accountRepository = new AccountRepositoryImpl("somePath");
         assertThrows(FileNotFoundException.class, () -> {
             accountRepository.getAllAccountsByClientId(1L);
