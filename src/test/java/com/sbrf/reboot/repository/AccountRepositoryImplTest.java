@@ -32,13 +32,13 @@ class AccountRepositoryImplTest {
         System.out.println("Это массив");
         System.out.println(accounts);
 
-        assertTrue(allAccountsByClientId.containsAll(accounts));
+        assertTrue(accounts.containsAll(allAccountsByClientId));
     }
 
     @Test
     void successGetAllAccountsByClientId()  throws IOException{
         accountRepository = new AccountRepositoryImpl("src/main/resources/Accounts.txt");
-        Set<Account> allAccountsByClientId = accountRepository.getAllAccountsByClientId(1);
+        Set<Account> allAccountsByClientId = accountRepository.getAllAccountsByClientId(2);
         Assertions.assertTrue(allAccountsByClientId.contains(new Account(2,"5-ACC1NUM")));
     }
 
