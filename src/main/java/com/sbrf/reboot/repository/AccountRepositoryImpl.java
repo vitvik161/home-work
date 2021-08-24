@@ -23,34 +23,29 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     //    @SneakyThrows
     @Override
-    public Set<Account> getAllAccountsByClientId(long id) throws FileNotFoundException {
+    public Set<Account> getAllAccountsByClientId(long id) throws IOException {
         Set<Account> accounts = new HashSet();
         String json = null;
-        try (BufferedReader reader = new BufferedReader(new FileReader(localPath))) {
-            String line;
-            int localCnt = 0;
-            Long localClientId = null;
-            String localNumber = null;
-            while ((line = reader.readLine()) != null) {
-                if (line.indexOf("\"clientId\": ") > 0) {
-                    localClientId = Long.parseLong(line.substring(line.indexOf("\": ") + 3, line.length() - 1));
-                }
-                if (line.indexOf("\"number\": ") > 0) {
-                    localNumber = line.substring(line.indexOf("\": \"") + 4, line.length() - 1);
-                    localCnt = 1;
-                }
-                if (localCnt == 1) {
-                    System.out.println(localClientId + "  -  " + localNumber);
-                    if (localClientId == id) {
-                        accounts.add(new Account(localClientId, localNumber));
-                    }
-                    localCnt = 0;
-                }
+        BufferedReader reader = new BufferedReader(new FileReader(localPath));
+        String line;
+        int localCnt = 0;
+        Long localClientId = null;
+        String localNumber = null;
+        while ((line = reader.readLine()) != null) {
+            if (line.indexOf("\"clientId\": ") > 0) {
+                localClientId = Long.parseLong(line.substring(line.indexOf("\": ") + 3, line.length() - 1));
             }
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException(localPath);
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (line.indexOf("\"number\": ") > 0) {
+                localNumber = line.substring(line.indexOf("\": \"") + 4, line.length() - 1);
+                localCnt = 1;
+            }
+            if (localCnt == 1) {
+                System.out.println(localClientId + "  -  " + localNumber);
+                if (localClientId == id) {
+                    accounts.add(new Account(localClientId, localNumber));
+                }
+                localCnt = 0;
+            }
         }
         System.out.println(accounts);
         return accounts;

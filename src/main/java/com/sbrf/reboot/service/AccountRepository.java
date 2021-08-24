@@ -8,5 +8,5 @@ import java.util.HashSet;
 import java.util.Set;
 
 public interface AccountRepository {
-    Set<Account> getAllAccountsByClientId(long id) throws FileNotFoundException;
+    Set<Account> getAllAccountsByClientId(long id) throws IOException;
 }

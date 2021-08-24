@@ -14,16 +14,8 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public boolean isAccountExist(long clientId, Account account) throws FileNotFoundException {
+    public boolean isAccountExist(long clientId, Account account) throws IOException {
         boolean flag = false;
         return accountRepository.getAllAccountsByClientId(clientId).contains(account);
-        //        Set<Account> accounts = accountRepository.getAllAccountsByClientId(clientId);
-//        for (Account value : accounts) {
-//            if (account.equals(value)) {
-//                flag = true;
-//                break;
-//            }
-//        }
-//        return flag;
     }
 }
