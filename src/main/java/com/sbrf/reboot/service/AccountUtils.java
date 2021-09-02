@@ -10,7 +10,7 @@ public class AccountUtils {
         Comparator<Account> comparator = new Comparator<Account>() {
             @Override
             public int compare(Account left, Account right) {
-                return left.getClientId() > right.getClientId() ? 1 : -1; // use your logic
+                return left.getClientId() > right.getClientId() ? 1 : -1;
             }
         };
         Collections.sort(accountList, comparator);
